@@ -216,6 +216,17 @@ void lcd_ini(void)
 }
 
 
+void lcd_clear(void){
+  LCD->WF8B[LCD_FRONTPLANE0] = LCD_CLEAR;
+  LCD->WF8B[LCD_FRONTPLANE1] = LCD_CLEAR;
+  LCD->WF8B[LCD_FRONTPLANE2] = LCD_CLEAR;
+  LCD->WF8B[LCD_FRONTPLANE3] = LCD_CLEAR;
+  LCD->WF8B[LCD_FRONTPLANE4] = LCD_CLEAR;
+  LCD->WF8B[LCD_FRONTPLANE5] = LCD_CLEAR;
+  LCD->WF8B[LCD_FRONTPLANE6] = LCD_CLEAR;
+  LCD->WF8B[LCD_FRONTPLANE7] = LCD_CLEAR;
+}
+
 //
 // Sets a value from 0-F to a specified Digit, with 1 being the leftmost,
 // 4 being the rightmost. Will not display error is Value is outside of

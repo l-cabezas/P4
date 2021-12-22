@@ -6,6 +6,7 @@
 #define _LCD_H_       /**< Symbol preventing repeated inclusion */
 
 void lcd_ini(void);
+void lcd_clear(void);
 void lcd_set(uint8_t value, uint8_t digit);
 void lcd_display_dec(uint16_t value);
 void lcd_display_hex(uint16_t value);

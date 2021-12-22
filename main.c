@@ -122,11 +122,6 @@ void leds_ini()
 void PORTDIntHandler(void)
 {
   PORTC->ISFR = 0xFFFFFFFF; // Clear IRQ
-  //if((sw1_check() && (GPIOE->PDIR & (1 << 29)))||(sw2_check() && (GPIOD->PDIR & (1 << 5)))){
-	//hits++;
-    //}else{
-    	//misses++;
-    //} 
     not_pressed=0; 
 }
 
@@ -149,7 +144,6 @@ int main(void)
   //cuando se complete SOS se enciende el el rojo y SOS parpadea. no se aceptan mas entradas (no se vuelve a enceder el led verde)
  
   
-  // 'Random' sequence :-)
   volatile unsigned int sequence = 0x1C7,
   index = 0;
   int vabien = 1;
@@ -176,23 +170,26 @@ int main(void)
     }
     
     if((vabien) && (index==2)){//mostrar S
-    	lcd_display_dec(5);
+    	lcd_set(5, 4);
     };
     if((vabien) && (index==5)){//mostrar SO
-    	lcd_display_dec(50);
+    	lcd_set(5, 3);
+    	lcd_set(0, 4);
     };
     if((vabien) && (index==8)){//mostrar SOS
-    	lcd_display_dec(505);
+    	lcd_set(5, 2);
+    	lcd_set(0, 3);
+    	lcd_set(5, 4);
     };
     //si index es 2 o 5 o 8 se ha acabado de hacer una letra, imprimirla en el lcd o borrar
     not_pressed = 1;
     index++;
     
-    if(!vabien){lcd_display_dec(0); index=0;vabien=1;};
+    if(!vabien){lcd_clear(); index=0;vabien=1;};
 
   }
-	//PORTC->PCR[3] &= ~(1<<24);
-  	//PORTC->PCR[12]&= ~(1<<24);
+
+  	NVIC_DisableIRQ(31);
   	
 
   GPIOE->PCOR =(1<<29);
